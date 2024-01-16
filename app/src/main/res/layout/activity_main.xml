@@ -1,0 +1,69 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="454dp"
+    android:layout_height="902dp"
+    android:background="#C0EBFD"
+    android:clipToOutline="true">
+
+   <!-- 카메라 -->
+    <View
+        android:id="@+id/removebg_pr1"
+        android:layout_width="155dp"
+        android:layout_height="121dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/cam" />
+
+    <View
+        android:id="@+id/removebg_pr2"
+        android:layout_width="163dp"
+        android:layout_height="141dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="610dp"
+        android:background="@drawable/ho" />
+
+    <View
+        android:id="@+id/removebg_pr3"
+        android:layout_width="151dp"
+        android:layout_height="117dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="630dp"
+        android:background="@drawable/play" />
+
+    <View
+        android:id="@+id/removebg_pr4"
+        android:layout_width="147dp"
+        android:layout_height="110dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="630dp"
+        android:background="@drawable/ri" />
+
+
+    <View
+        android:id="@+id/removebg_pr5"
+        android:layout_width="123dp"
+        android:layout_height="114dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="264dp"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/rec" />
+
+    <View
+        android:id="@+id/removebg_pr6"
+        android:layout_width="319dp"
+        android:layout_height="425dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/pro" />
+
+</RelativeLayout>
