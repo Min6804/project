@@ -13,4 +13,20 @@
         android:layout_marginLeft="12dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/pro" />
+
+    <!--되돌아가기-->
+    <View
+        android:id="@+id/check_1"
+        android:layout_width="119dp"
+        android:layout_height="69dp"
+        android:background="@drawable/check"
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:aapt="http://schemas.android.com/aapt"
+        android:width="119dp"
+        android:height="69dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="630dp"
+        />
+
 </RelativeLayout>
