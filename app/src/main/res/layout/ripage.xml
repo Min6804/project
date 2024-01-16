@@ -4,4 +4,14 @@
     android:layout_height="902dp"
     android:background="#C0EBFD"
     android:clipToOutline="true">
+    <!--밥&물-->
+    <View
+        android:id="@+id/removebg_pr4"
+        android:layout_width="147dp"
+        android:layout_height="110dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ri" />
 </RelativeLayout>
