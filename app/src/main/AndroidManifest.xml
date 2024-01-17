@@ -27,6 +27,7 @@
         <activity android:name=".FoodActivity" />
         <activity android:name=".RecordActivity" />
         <activity android:name=".ProfileActivity" />
+        <activity android:name=".AlarmActivity" />
 
     </application>
 

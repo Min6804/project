@@ -5,82 +5,91 @@
     android:background="#C0EBFD"
     android:clipToOutline="true">
 
- <!-- 카메라 -->
+
+
  <ImageView
      android:id="@+id/cam"
      android:layout_width="155dp"
      android:layout_height="121dp"
      android:layout_alignParentLeft="true"
      android:layout_alignParentTop="true"
-     android:layout_marginLeft="12dp"
-     android:layout_marginTop="10dp"
+     android:layout_marginLeft="147dp"
+     android:layout_marginTop="16dp"
      android:background="@drawable/cam"
      android:clickable="true"
      android:onClick="campage" />
 
- <!-- 예방접종 -->
+
+
  <ImageView
      android:id="@+id/ho"
      android:layout_width="163dp"
      android:layout_height="141dp"
      android:layout_alignParentLeft="true"
      android:layout_alignParentTop="true"
-     android:layout_marginLeft="270dp"
-     android:layout_marginTop="610dp"
+     android:layout_marginLeft="269dp"
+     android:layout_marginTop="595dp"
      android:background="@drawable/ho"
      android:clickable="true"
      android:onClick="hopage" />
 
- <!-- 놀아주기 -->
  <ImageView
      android:id="@+id/play"
      android:layout_width="151dp"
      android:layout_height="117dp"
      android:layout_alignParentLeft="true"
      android:layout_alignParentTop="true"
-     android:layout_marginLeft="140dp"
-     android:layout_marginTop="630dp"
+     android:layout_marginLeft="137dp"
+     android:layout_marginTop="617dp"
      android:background="@drawable/play"
      android:clickable="true"
      android:onClick="playpage" />
 
- <!-- 밥&물 -->
  <ImageView
      android:id="@+id/ri"
      android:layout_width="147dp"
      android:layout_height="110dp"
      android:layout_alignParentLeft="true"
      android:layout_alignParentTop="true"
-     android:layout_marginLeft="13dp"
-     android:layout_marginTop="630dp"
+     android:layout_marginLeft="-8dp"
+     android:layout_marginTop="621dp"
      android:background="@drawable/ri"
      android:clickable="true"
      android:onClick="ripage" />
 
- <!-- 녹음 -->
  <ImageView
      android:id="@+id/rec"
      android:layout_width="123dp"
      android:layout_height="114dp"
      android:layout_alignParentLeft="true"
      android:layout_alignParentTop="true"
-     android:layout_marginLeft="264dp"
-     android:layout_marginTop="14dp"
+     android:layout_marginLeft="285dp"
+     android:layout_marginTop="17dp"
      android:background="@drawable/rec"
      android:clickable="true"
      android:onClick="recpage" />
 
- <!-- 프로필 -->
  <ImageView
      android:id="@+id/pro"
      android:layout_width="319dp"
      android:layout_height="425dp"
      android:layout_alignParentLeft="true"
      android:layout_alignParentTop="true"
-     android:layout_marginLeft="44dp"
-     android:layout_marginTop="120dp"
+     android:layout_marginLeft="50dp"
+     android:layout_marginTop="177dp"
      android:background="@drawable/pro"
      android:clickable="true"
      android:onClick="propage" />
 
+ <ImageView
+     android:id="@+id/ball"
+     android:layout_width="110dp"
+     android:layout_height="120dp"
+     android:layout_alignParentLeft="true"
+     android:layout_alignParentTop="true"
+     android:layout_marginLeft="12dp"
+     android:layout_marginTop="10dp"
+     android:background="@drawable/ball"
+     android:clickable="true"
+     android:onClick="ballpage" />
 </RelativeLayout>
