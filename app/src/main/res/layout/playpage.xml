@@ -27,6 +27,8 @@
         android:height="69dp"
         android:layout_marginLeft="13dp"
         android:layout_marginTop="630dp"
-        />
-
+        android:src="@drawable/check"
+        android:clickable="true"
+        android:onClick="goBack" />
+    />
 </RelativeLayout>

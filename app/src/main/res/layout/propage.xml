@@ -5,7 +5,7 @@
     android:background="#C0EBFD"
     android:clipToOutline="true">
     <View
-        android:id="@+id/removebg_pr6"
+        android:id="@+id/pro"
         android:layout_width="147dp"
         android:layout_height="110dp"
         android:layout_alignParentLeft="true"
@@ -27,6 +27,8 @@
         android:height="69dp"
         android:layout_marginLeft="13dp"
         android:layout_marginTop="630dp"
-        />
-
+        android:src="@drawable/check"
+        android:clickable="true"
+        android:onClick="goBack" />
+    />
 </RelativeLayout>

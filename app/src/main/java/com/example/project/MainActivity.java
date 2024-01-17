@@ -15,72 +15,74 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.cam).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                campage();
+                openCameraPage();
             }
         });
 
         findViewById(R.id.ho).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hopage();
+                openVaccinationPage();
             }
         });
 
         findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                playpage();
+                openPlayPage();
             }
         });
 
         findViewById(R.id.pro).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                propage();
+                openProfilePage();
             }
         });
 
         findViewById(R.id.rec).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                reccpage();
+                openRecordPage();
             }
         });
 
         findViewById(R.id.ri).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ripage();
+
+
+                openFoodPage();
             }
         });
     }
 
-    private void campage() {
+    private void openCameraPage() {
         Intent intent = new Intent(this, CameraActivity.class);
         startActivity(intent);
     }
 
-    private void hopage() {
+    private void openVaccinationPage() {
         Intent intent = new Intent(this, VaccinationActivity.class);
         startActivity(intent);
     }
 
-    private void playpage() {
+    private void openPlayPage() {
         Intent intent = new Intent(this, PlayActivity.class);
         startActivity(intent);
     }
 
-    private void ripage() {
-        Intent intent = new Intent(this, FoodActivity.class);
-        startActivity(intent);
-    }
-
-    private void reccpage() {
+    private void openRecordPage() {
         Intent intent = new Intent(this, RecordActivity.class);
         startActivity(intent);
     }
 
-    private void propage() {
+    private void openFoodPage() {
+        Intent intent = new Intent(this, FoodActivity.class);
+        startActivity(intent);
+    }
+
+    private void openProfilePage() {
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
