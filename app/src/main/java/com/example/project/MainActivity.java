@@ -12,42 +12,42 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.removebg_pr1).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.cam).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 campage();
             }
         });
 
-        findViewById(R.id.removebg_pr2).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ho).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 hopage();
             }
         });
 
-        findViewById(R.id.removebg_pr3).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 playpage();
             }
         });
 
-        findViewById(R.id.removebg_pr4).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.pro).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 propage();
             }
         });
 
-        findViewById(R.id.removebg_pr5).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.rec).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 reccpage();
             }
         });
 
-        findViewById(R.id.removebg_pr6).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.ri).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ripage();

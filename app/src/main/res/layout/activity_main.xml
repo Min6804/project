@@ -7,7 +7,7 @@
 
  <!-- 카메라 -->
  <ImageView
-     android:id="@+id/removebg_pr1"
+     android:id="@+id/R.id.cam"
      android:layout_width="155dp"
      android:layout_height="121dp"
      android:layout_alignParentLeft="true"
@@ -20,7 +20,7 @@
 
  <!-- 예방접종 -->
  <ImageView
-     android:id="@+id/removebg_pr2"
+     android:id="@+id/R.id.ho"
      android:layout_width="163dp"
      android:layout_height="141dp"
      android:layout_alignParentLeft="true"
@@ -33,7 +33,7 @@
 
  <!-- 놀아주기 -->
  <ImageView
-     android:id="@+id/removebg_pr3"
+     android:id="@+id/R.id.play"
      android:layout_width="151dp"
      android:layout_height="117dp"
      android:layout_alignParentLeft="true"
@@ -42,11 +42,11 @@
      android:layout_marginTop="630dp"
      android:background="@drawable/play"
      android:clickable="true"
-     android:onClick="palaypage" />
+     android:onClick="playpage" />
 
  <!-- 밥&물 -->
  <ImageView
-     android:id="@+id/removebg_pr4"
+     android:id="@+id/R.id.ri"
      android:layout_width="147dp"
      android:layout_height="110dp"
      android:layout_alignParentLeft="true"
@@ -59,7 +59,7 @@
 
  <!-- 녹음 -->
  <ImageView
-     android:id="@+id/removebg_pr5"
+     android:id="@+id/R.id.rec"
      android:layout_width="123dp"
      android:layout_height="114dp"
      android:layout_alignParentLeft="true"
@@ -72,7 +72,7 @@
 
  <!-- 프로필 -->
  <ImageView
-     android:id="@+id/removebg_pr6"
+     android:id="@+id/R.id.pro"
      android:layout_width="319dp"
      android:layout_height="425dp"
      android:layout_alignParentLeft="true"
