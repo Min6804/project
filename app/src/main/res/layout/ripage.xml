@@ -1,36 +1,25 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="454dp"
-    android:layout_height="902dp"
-    android:background="#C0EBFD"
-    android:clipToOutline="true">
-    <!--밥&물-->
-    <View
-        android:id="@+id/removebg_pr4"
-        android:layout_width="147dp"
-        android:layout_height="110dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/ri" />
-
-    <!--되돌아가기-->
-    <View
-        android:id="@+id/check_1"
-        android:layout_width="119dp"
-        android:layout_height="69dp"
-        android:background="@drawable/check"
-
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:aapt="http://schemas.android.com/aapt"
-        android:width="119dp"
-        android:height="69dp"
-        android:layout_marginLeft="13dp"
-        android:layout_marginTop="630dp"
-        android:src="@drawable/check"
-        android:clickable="true"
-        android:onClick="goBack" />
-    />
-
-</RelativeLayout>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id = "@+id/babButton"
+            android:layout_weight="1"
+            android:text="ledOn"/>
+        <Button
+            android:id = "@+id/mulButton"
+            android:layout_weight="1"
+            android:text="ledOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>
