@@ -1,9 +1,10 @@
 package com.example.project;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // AlarmHelper 인스턴스 생성
         alarmHelper = new AlarmHelper();
 
         // 각 버튼에 클릭 리스너 등록
@@ -29,13 +29,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openVaccinationPage();
-            }
-        });
-
-        findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPlayPage();
             }
         });
 
@@ -79,11 +72,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openPlayPage() {
-        Intent intent = new Intent(this, PlayActivity.class);
-        startActivity(intent);
-    }
-
     private void openRecordPage() {
         Intent intent = new Intent(this, RecordActivity.class);
         startActivity(intent);
@@ -108,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
     // 알람 설정 메서드
     private void setAlarm() {
-        // 알람 설정 예시: 10초 후 알람
-        long alarmTimeInMillis = System.currentTimeMillis();
-        alarmHelper.startAlarm(this, alarmTimeInMillis);
+
+        long alarmTimeInMillis = System.currentTimeMillis() + 10000;
+        AlarmHelper.startAlarm(this, alarmTimeInMillis);
     }
 }

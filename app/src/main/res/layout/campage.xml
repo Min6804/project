@@ -9,7 +9,27 @@
         android:id="@+id/cameraPreview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/check_1" />
+        android:layout_above="@+id/btnCapture" />
+
+    <Button
+        android:id="@+id/btnCapture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사진 찍기"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:onClick="takePicture" />
+
+    <Button
+        android:id="@+id/btnOpenGallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="갤러리 열기"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:onClick="openGallery" />
 
     <View
         android:id="@+id/removebg_pr1"
@@ -19,24 +39,22 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="12dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/cam" />
+        android:background="@drawable/cam"
+        android:clickable="true"
+        android:onClick="openCampage2" />
 
-
-    <!--되돌아가기-->
     <View
         android:id="@+id/check_1"
         android:layout_width="119dp"
         android:layout_height="69dp"
         android:background="@drawable/check"
-
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:aapt="http://schemas.android.com/aapt"
-        android:width="119dp"
-        android:height="69dp"
         android:layout_marginLeft="13dp"
         android:layout_marginTop="630dp"
-        android:src="@drawable/check"
         android:clickable="true"
         android:onClick="goBack" />
-    />
+    <WebView
+        android:id="@+id/myWebView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 </RelativeLayout>

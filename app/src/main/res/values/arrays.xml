@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bab">
+        <item>Bab1</item>
+        <item>Bab2</item>
+        <item>Bab3</item>
+        <!-- 추가적인 아이템들을 필요에 따라 추가하세요 -->
+    </string-array>
+</resources>

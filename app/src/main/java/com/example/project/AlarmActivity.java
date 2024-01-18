@@ -1,103 +1,108 @@
 package com.example.project;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.Context;
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
-import java.util.Calendar;
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.io.DataOutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
 
 public class AlarmActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
-    public static final String TAG = "MAIN";
-
-    private TextView timeText;
-    private AlarmHelper alarmHelper;
+    public static String BIP = "192.168.0.98";
+    public static int BPort = 2023;
+    public static String BMD = "0";
+    private DataHandler dataHandler;
+    private Spinner spinner;
+    private EditText editText; // Added editText declaration
+    private TextView resultTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ball);
 
-        timeText = findViewById(R.id.time_text);
-        alarmHelper = new AlarmHelper();
+        dataHandler = new DataHandler(this);
+        spinner = findViewById(R.id.spinner);
+        editText = findViewById(R.id.editText);
+        resultTextView = findViewById(R.id.resultTextView);
 
-        Button timeBtn = findViewById(R.id.time_btn);
+        Button updateButton = findViewById(R.id.updateButton);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this,
+                R.array.bab,
+                android.R.layout.simple_spinner_item
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
 
-        // 시간 설정
-        timeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DialogFragment timePicker = new TimePickerFragment();
-                timePicker.show(getSupportFragmentManager(), "time picker");
-            }
-        });
+        // Added editText initialization
+        editText = findViewById(R.id.editText);
 
-        // 알람 취소
-        Button alarmCancelBtn = findViewById(R.id.alarm_cancel_btn);
-        alarmCancelBtn.setOnClickListener(new View.OnClickListener() {
+        updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cancelAlarm();
+                dataHandler.open();
+                Cursor cursor = dataHandler.getAllData();
+                StringBuilder resultStringBuilder = new StringBuilder();
+
+                if (cursor.moveToFirst()) {
+                    do {
+                        String column1Value = cursor.getString(cursor.getColumnIndex("column1"));
+                        int column2Value = cursor.getInt(cursor.getColumnIndex("column2"));
+
+                        resultStringBuilder.append("").append(column1Value)
+                                .append(", 시간: ").append(column2Value).append("\n");
+
+                    } while (cursor.moveToNext());
+                }
+                resultTextView.setText(resultStringBuilder.toString());
+                String b = resultStringBuilder.toString();
+                BMD = b;
+
+                Socket_AsyncTask socketTask = new Socket_AsyncTask();
+                socketTask.execute();
+
+                cursor.close();
+                dataHandler.close();
             }
         });
     }
 
-    /**
-     * 시간을 정하면 호출되는 메소드
-     * @param view 화면
-     * @param hourOfDay 시간
-     * @param minute 분
-     */
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        Log.d(TAG, "## onTimeSet ## ");
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
-        c.set(Calendar.MINUTE, minute);
-        c.set(Calendar.SECOND, 0);
-
-        // 화면에 시간지정
-        updateTimeText(c);
-
-        // 알람설정정
-        startAlarm(c.getTimeInMillis());
+        // TimePickerDialog에서 시간이 설정되었을 때 호출되는 메서드
+        String selectedTime = hourOfDay + ":" + minute;
+        editText.setText(selectedTime);
     }
 
-    /**
-     * 화면에 사용자가 선택한 시간을 보여주는 메소드
-     * @param c 시간
-     */
-    private void updateTimeText(Calendar c) {
-        Log.d(TAG, "## updateTimeText ## ");
-        String timeText = "알람시간: ";
-        timeText += DateFormat.format("hh:mm a", c);
-        this.timeText.setText(timeText);
-    }
+    public class Socket_AsyncTask extends AsyncTask<Void, Void, Void> {
+        Socket socket;
 
-    /**
-     * 알람 시작
-     * @param alarmTimeInMillis 알람 시간 (long)
-     */
-    private void startAlarm(long alarmTimeInMillis) {
-        Log.d(TAG, "## startAlarm ## ");
-        alarmHelper.startAlarm(this, alarmTimeInMillis);
-    }
-
-    /**
-     * 알람 취소
-     */
-    private void cancelAlarm() {
-        Log.d(TAG, "## cancelAlarm ## ");
-        alarmHelper.cancelAlarm(this);
-        timeText.setText("알람 취소");
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                InetAddress inetAddress = InetAddress.getByName(BIP);
+                socket = new Socket(inetAddress, BPort);
+                DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+                dos.writeBytes(BMD);
+                dos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }
