@@ -21,19 +21,12 @@ public class DataHandler {
     }
 
     public void close() {
-        // dbHelper.close();  // 이 부분은 더 이상 필요하지 않습니다.
+        // dbHelper.close();
     }
 
-    // 데이터 추가
-    public long insertData(String column1Value, int column2Value) {
-        ContentValues values = new ContentValues();
-        values.put("column1", column1Value);
-        values.put("column2", column2Value);
-        return database.insert("babtable", null, values);
-    }
 
     // 데이터 수정
-    public int updateData(String originalColumn1Value, String newColumn1Value, int newColumn2Value) {
+    public int updateData(String originalColumn1Value, String newColumn1Value, String newColumn2Value) {
         ContentValues values = new ContentValues();
         values.put("column1", newColumn1Value);
         values.put("column2", newColumn2Value);
@@ -70,16 +63,16 @@ public class DataHandler {
             String createTableQuery = "CREATE TABLE IF NOT EXISTS babtable ("
                     + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + "column1 TEXT,"
-                    + "column2 INTEGER);";
+                    + "column2 TEXT);";
 
             db.execSQL(createTableQuery);
         }
 
         private void insertInitialData(SQLiteDatabase db) {
             String[] initialData = {
-                    "INSERT INTO babtable (column1, column2) VALUES ('아침', 0800);",
-                    "INSERT INTO babtable (column1, column2) VALUES ('점심', 1230);",
-                    "INSERT INTO babtable (column1, column2) VALUES ('저녁', 1830);"
+                    "INSERT INTO babtable (column1, column2) VALUES ('A', '0800');",
+                    "INSERT INTO babtable (column1, column2) VALUES ('B', '1230');",
+                    "INSERT INTO babtable (column1, column2) VALUES ('C', '1830');"
             };
 
             for (String query : initialData) {
