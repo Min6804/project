@@ -1,153 +1,190 @@
 package com.example.project;
 
-import android.content.Context;
+import android.Manifest;
 import android.content.Intent;
-import android.hardware.Camera;
-import android.net.Uri;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.SurfaceHolder;
-import android.view.SurfaceView;
+import android.view.MotionEvent;
+import android.view.Surface;
+import android.view.TextureView;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.Toast;
+import android.graphics.SurfaceTexture;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.squareup.picasso.Picasso;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-public class CameraActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+public class CameraActivity extends AppCompatActivity {
+
     public static String mIP = "192.168.0.98";
     public static int mPort = 2023;
     public static String CMD = "0";
-
-    private Camera mCamera;
-    private SurfaceView mSurfaceView;
-    private SurfaceHolder mSurfaceHolder;
-    private WebView myWebView;
+    private Camera2Helper mCamera2Helper;
+    private TextureView textureView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.campage);
+        setContentView(R.layout.activity_main);
 
-        myWebView = findViewById(R.id.myWebView);
-        mSurfaceView = findViewById(R.id.cameraPreview);
-        mSurfaceHolder = mSurfaceView.getHolder();
-        mSurfaceHolder.addCallback(this);
-        mSurfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+        WebView myWebView = findViewById(R.id.webView);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        myWebView.getSettings().setSupportMultipleWindows(true);
 
-        Button btnCapture = findViewById(R.id.btnCapture);
-        Button btnOpenGallery = findViewById(R.id.btnOpenGallery);
+        myWebView.setWebViewClient(new WebViewClient());
+        myWebView.setWebChromeClient(new WebChromeClient());
+        myWebView.loadUrl("http://192.168.0.98:8081/");
 
-        btnCapture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCamera.takePicture(null, null, new Camera.PictureCallback() {
-                    @Override
-                    public void onPictureTaken(byte[] data, Camera camera) {
-                        String imagePath = savePicture(data);
-                        refreshGallery(CameraActivity.this, imagePath);
-                        mCamera.startPreview();
-                    }
-                });
+        textureView = findViewById(R.id.cameraPreview);
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_camera);
+
+            // 아이콘을 클릭하는 부분 추가
+            Button btnCamIcon = findViewById(R.id.btnCamIcon);
+            btnCamIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // "cam" 아이콘을 클릭하면 CameraActivity로 이동
+                    Intent cameraIntent = new Intent(MainActivity.this, CameraActivity.class);
+                    startActivity(cameraIntent);
+                }
+            });
+        }
+
+        textureView.setSurfaceTextureListener(surfaceTextureListener);
+
+        textureView.setOnTouchListener((v, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                captureImage();
+                return true;
             }
+            return false;
         });
 
-        btnOpenGallery.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(CameraActivity.this, CameraActivity2.class);
-                startActivity(intent);
+        Button btnGallery = findViewById(R.id.btnGallery);
+        btnGallery.setOnClickListener(v -> navigateToCameraActivity2());
+
+
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA},
+                        1);
+            } else {
+                initCamera();
             }
-        });
+
+
     }
 
+    private void initCamera() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mCamera2Helper = new Camera2Helper(this, textureView);
+            mCamera2Helper.setCameraCallback(bitmap -> {
+            });
+            mCamera2Helper.openCamera();
+        }
+    }
+
+    private final TextureView.SurfaceTextureListener surfaceTextureListener = new TextureView.SurfaceTextureListener() {
+        @Override
+        public void onSurfaceTextureAvailable(@NonNull SurfaceTexture surface, int width, int height) {
+            mCamera2Helper.setPreviewSurface(new Surface(surface));
+        }
+
+
+        @Override
+        public void onSurfaceTextureSizeChanged(@NonNull android.graphics.SurfaceTexture surface, int width, int height) {
+            // Ignored
+        }
+
+        @Override
+        public boolean onSurfaceTextureDestroyed(@NonNull android.graphics.SurfaceTexture surface) {
+            return true;
+        }
+
+        @Override
+        public void onSurfaceTextureUpdated(@NonNull android.graphics.SurfaceTexture surface) {
+            // Ignored
+        }
+    };
+
     @Override
-    public void surfaceCreated(SurfaceHolder holder) {
-        try {
-            mCamera = Camera.open();
-            mCamera.setPreviewDisplay(holder);
-            mCamera.startPreview();
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == 1 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            initCamera();
+        }
+    }
+
+    private void captureImage() {
+        if (mCamera2Helper != null) {
+            Bitmap capturedBitmap = mCamera2Helper.captureStillPicture();
+            if (capturedBitmap != null) {
+                String imagePath = saveBitmapToExternalStorage(capturedBitmap);
+                sendImageToCameraActivity2(imagePath);
+            }
+        }
+    }
+
+    private String saveBitmapToExternalStorage(Bitmap bitmap) {
+        String fileName = "captured_image.jpg";
+        File directory = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        File file = new File(directory, fileName);
+        try (OutputStream stream = new FileOutputStream(file)) {
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+            return file.getAbsolutePath();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        // Handle surface changes if needed
-    }
-
-    @Override
-    public void surfaceDestroyed(SurfaceHolder holder) {
-        if (mCamera != null) {
-            mCamera.stopPreview();
-            mCamera.release();
-            mCamera = null;
-        }
-    }
-
-    private String savePicture(byte[] data) {
-        File pictureFile = getOutputMediaFile();
-        if (pictureFile == null) {
-            Toast.makeText(this, "Error saving picture", Toast.LENGTH_SHORT).show();
             return null;
         }
-
-        try {
-            FileOutputStream fos = new FileOutputStream(pictureFile);
-            fos.write(data);
-            fos.close();
-            Toast.makeText(this, "Picture saved", Toast.LENGTH_SHORT).show();
-            return pictureFile.getAbsolutePath();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
     }
 
-    private File getOutputMediaFile() {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "IMG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-
-        File imageFile;
-        try {
-            imageFile = File.createTempFile(imageFileName, ".jpg", storageDir);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return imageFile;
+    private void sendImageToCameraActivity2(String imagePath) {
+        Intent intent = new Intent(this, CameraActivity2.class);
+        intent.putExtra("imagePath", imagePath);
+        startActivity(intent);
     }
 
-    private void refreshGallery(Context context, String imagePath) {
-        if (imagePath != null) {
-            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-            File file = new File(imagePath);
-            Uri contentUri = Uri.fromFile(file);
-            mediaScanIntent.setData(contentUri);
-            context.sendBroadcast(mediaScanIntent);
-        }
+    private void navigateToCameraActivity2() {
+        Intent galleryIntent = new Intent(CameraActivity.this, CameraActivity2.class);
+        startActivity(galleryIntent);
+    }
+
+    private void navigateToMain() {
+        finish();
     }
 
     public class Socket_AsyncTask extends AsyncTask<Void, Void, Void> {
         Socket socket;
 
-        @Override
         protected Void doInBackground(Void... params) {
             try {
                 InetAddress inetAddress = InetAddress.getByName(CameraActivity.mIP);
@@ -157,6 +194,14 @@ public class CameraActivity extends AppCompatActivity implements SurfaceHolder.C
                 dos.close();
             } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    if (socket != null && !socket.isClosed()) {
+                        socket.close();
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
             return null;
         }

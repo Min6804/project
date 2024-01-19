@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingRight="16dp"
+    android:paddingBottom="16dp"
+    tools:context="com.example.project.WebViewActivity">
+
+    <!-- Your SurfaceView -->
+    <SurfaceView
+        android:id="@+id/surfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:background="#AAAAAA"/>
+
+    <!-- Your TextureView -->
+    <TextureView
+        android:id="@+id/realTextureViewId"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@id/surfaceView"
+        android:layout_marginTop="16dp"
+        android:background="#CCCCCC"/>
+
+    <!-- Your WebView -->
+    <WebView
+        android:id="@+id/webview"
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_below="@id/realTextureViewId"/>
+
+</RelativeLayout>

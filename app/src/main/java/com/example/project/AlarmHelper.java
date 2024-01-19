@@ -13,7 +13,7 @@ public class AlarmHelper {
     private static final int ALARM_REQUEST_CODE = 123; // 알람 식별자 코드
     private static final String CHANNEL_ID = "AlarmChannel";
 
-    public void setAlarm(Context context, long triggerTimeMillis) {
+    public static void startAlarm(Context context, long triggerTimeMillis) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         // 알람이 발생할 때 실행될 BroadcastReceiver 지정
@@ -26,17 +26,29 @@ public class AlarmHelper {
         );
 
         // 알람 설정
-        alarmManager.setExact(
-                AlarmManager.RTC_WAKEUP,
-                triggerTimeMillis,
-                pendingIntent
-        );
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmManager.setExactAndAllowWhileIdle(
+                    AlarmManager.RTC_WAKEUP,
+                    triggerTimeMillis,
+                    pendingIntent
+            );
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            alarmManager.setExact(
+                    AlarmManager.RTC_WAKEUP,
+                    triggerTimeMillis,
+                    pendingIntent
+            );
+        } else {
+            alarmManager.set(
+                    AlarmManager.RTC_WAKEUP,
+                    triggerTimeMillis,
+                    pendingIntent
+            );
+        }
     }
 
     public void cancelAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-        // 알람이 발생할 때 실행될 BroadcastReceiver 지정
         Intent intent = new Intent(context, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 context,

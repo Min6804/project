@@ -6,11 +6,12 @@
     android:clipToOutline="true">
 
     <ImageView
-        android:id="@+id/capturedImage"
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/check_2"
-        android:visibility="visible" />
+        android:scaleType="centerInside"
+        android:layout_centerInParent="true"
+        android:contentDescription="@null" />
 
     <View
         android:id="@+id/check_2"
@@ -21,4 +22,24 @@
         android:layout_marginTop="630dp"
         android:clickable="true"
         android:onClick="goBack" />
+
+    <LinearLayout
+        android:id="@+id/galleryLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/check_2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp">
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnGoToCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/galleryLayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:onClick="openCameraActivity" />
+
 </RelativeLayout>

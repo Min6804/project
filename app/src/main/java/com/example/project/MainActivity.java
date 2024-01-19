@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
         alarmHelper = new AlarmHelper();
 
-        // 각 버튼에 클릭 리스너 등록
+
         findViewById(R.id.cam).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    // AlarmActivity로 이동하는 메서드
+
     private void openAlarmPage() {
         Intent intent = new Intent(this, AlarmActivity.class);
         startActivity(intent);
@@ -96,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
     // 알람 설정 메서드
     private void setAlarm() {
-
         long alarmTimeInMillis = System.currentTimeMillis() + 10000;
         AlarmHelper.startAlarm(this, alarmTimeInMillis);
     }

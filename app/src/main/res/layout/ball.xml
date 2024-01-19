@@ -11,13 +11,11 @@
     android:clipToOutline="true"
     tools:context=".MainActivity">
 
-
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
     <EditText
         android:id="@+id/edittext"
@@ -26,7 +24,7 @@
         android:hint="Column 2 Value"
         android:inputType="number"
         android:layout_below="@id/spinner"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp" />
 
     <Button
         android:id="@+id/updateButton"
@@ -34,14 +32,23 @@
         android:layout_height="wrap_content"
         android:text="데이터 수정"
         android:layout_below="@id/edittext"
-        android:layout_marginTop="8dp"/>
+        android:layout_marginTop="8dp" />
 
     <TextView
         android:id="@+id/resultTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/updateButton"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
+
+    <!-- Added initialization for EditText -->
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Time"
+        android:layout_below="@id/resultTextView"
+        android:layout_marginTop="16dp" />
 
     <View
         android:id="@+id/check_1"
@@ -53,3 +60,4 @@
         android:clickable="true"
         android:onClick="goBack" />
 </RelativeLayout>
+

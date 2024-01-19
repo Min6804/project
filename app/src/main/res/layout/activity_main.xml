@@ -8,74 +8,72 @@
 
  <ImageView
      android:id="@+id/cam"
-     android:layout_width="155dp"
-     android:layout_height="121dp"
+     android:layout_width="136dp"
+     android:layout_height="85dp"
      android:layout_alignParentLeft="true"
      android:layout_alignParentTop="true"
-     android:layout_marginLeft="156dp"
-     android:layout_marginTop="14dp"
+     android:layout_marginLeft="-4dp"
+     android:layout_marginTop="273dp"
      android:background="@drawable/cam"
      android:clickable="true"
      android:onClick="campage" />
 
  <ImageView
      android:id="@+id/ho"
-     android:layout_width="163dp"
-     android:layout_height="141dp"
+     android:layout_width="116dp"
+     android:layout_height="102dp"
      android:layout_alignParentLeft="true"
      android:layout_alignParentTop="true"
-     android:layout_marginLeft="269dp"
-     android:layout_marginTop="595dp"
+     android:layout_marginLeft="2dp"
+     android:layout_marginTop="340dp"
      android:background="@drawable/ho"
      android:clickable="true"
      android:onClick="hopage" />
 
-
-
  <ImageView
      android:id="@+id/ri"
-     android:layout_width="147dp"
-     android:layout_height="110dp"
+     android:layout_width="122dp"
+     android:layout_height="84dp"
      android:layout_alignParentLeft="true"
      android:layout_alignParentTop="true"
-     android:layout_marginLeft="-8dp"
-     android:layout_marginTop="621dp"
+     android:layout_marginLeft="-3dp"
+     android:layout_marginTop="451dp"
      android:background="@drawable/ri"
      android:clickable="true"
      android:onClick="ripage" />
 
  <ImageView
      android:id="@+id/rec"
-     android:layout_width="123dp"
-     android:layout_height="114dp"
+     android:layout_width="111dp"
+     android:layout_height="102dp"
      android:layout_alignParentLeft="true"
      android:layout_alignParentTop="true"
-     android:layout_marginLeft="285dp"
-     android:layout_marginTop="17dp"
+     android:layout_marginLeft="10dp"
+     android:layout_marginTop="182dp"
      android:background="@drawable/rec"
      android:clickable="true"
      android:onClick="recpage" />
 
  <ImageView
      android:id="@+id/pro"
-     android:layout_width="319dp"
-     android:layout_height="425dp"
+     android:layout_width="91dp"
+     android:layout_height="84dp"
      android:layout_alignParentLeft="true"
      android:layout_alignParentTop="true"
-     android:layout_marginLeft="50dp"
-     android:layout_marginTop="177dp"
+     android:layout_marginLeft="20dp"
+     android:layout_marginTop="17dp"
      android:background="@drawable/pro"
      android:clickable="true"
      android:onClick="propage" />
 
  <ImageView
      android:id="@+id/ball"
-     android:layout_width="110dp"
-     android:layout_height="120dp"
+     android:layout_width="105dp"
+     android:layout_height="85dp"
      android:layout_alignParentLeft="true"
      android:layout_alignParentTop="true"
-     android:layout_marginLeft="12dp"
-     android:layout_marginTop="10dp"
+     android:layout_marginLeft="11dp"
+     android:layout_marginTop="98dp"
      android:background="@drawable/ball"
      android:clickable="true"
      android:onClick="ballpage" />
