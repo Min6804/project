@@ -17,6 +17,10 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.graphics.SurfaceTexture;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.content.Intent;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,8 +63,6 @@ public class CameraActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_camera);
-
-            // 아이콘을 클릭하는 부분 추가
             Button btnCamIcon = findViewById(R.id.btnCamIcon);
             btnCamIcon.setOnClickListener(new View.OnClickListener() {
                 @Override
